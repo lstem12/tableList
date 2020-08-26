@@ -44,34 +44,41 @@
 								onclick="doLogin()">Login</button>
 						</div>
 					</div>
-
-					<div class="txt1 text-center p-t-54 p-b-20">
-						<span> Or Sign Up Using </span>
-					</div>
-
-					<div class="flex-c-m">
-						<a href="#" class="login100-social-item bg1"> <i
-							class="fa fa-facebook"></i>
-						</a> <a href="#" class="login100-social-item bg2"> <i
-							class="fa fa-twitter"></i>
-						</a> <a href="#" class="login100-social-item bg3"> <i
-							class="fa fa-google"></i>
-						</a>
-					</div>
-
-					<div class="flex-col-c p-t-155">
-						<span class="txt1 p-b-17"> Or Sign Up Using </span> 
-						<a href="/views/user/sign-up" class="txt2"> Sign Up </a>
-					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 <script>
-function doLogin(){
+function doLogin() {
+	var uiId = $('#ui_id').val();
+	var uiPassword = $('#ui_password').val();
+	if(uiId == null || uiId.trim().length<4 || uiId.trim().length>20){
+		alert('아이디는 4글자이상 20글자 이하로 작성해주세요.');
+		return;
+	}else if(uiPassword == null || uiPassword.trim().length<4 || uiPassword.trim().length>20){
+		alert('비밀번호는 4글자이상 20글자 이하로 작성해주세요.');
+		return;
+	}
+	var cmd = 'login';
+	var param = {
+		ui_id : uiId,
+		ui_password : uiPassword,
+		cmd : cmd
+	}
 	$.ajax({
-		
-	})
+		method : 'POST',
+		url : '/ajax/table',
+		data : JSON.stringify(param),
+		contentType:'application/json',
+		success : function(res){
+			if(res.result){
+				alert("로그인성공");
+				location.href = "/views/table/list";
+			}else{
+				alert("아이디랑 비밀번호를 확인해주세요");
+			}
+		}
+	});
 }
 </script>
 </body>

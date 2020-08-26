@@ -26,8 +26,7 @@ public class CommonFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest)request;
 		String uri = req.getRequestURI();
-		if(!uri.startsWith("/ajax")) {
-			
+		if(!uri.startsWith("/ajax")) {			
 		}
 		chain.doFilter(request, response);
 	}
