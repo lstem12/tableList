@@ -30,7 +30,7 @@ public class TableListServlet extends HttpServlet {
 		if("list".equals(cmd)) {
 			result.put("list", tableListService.tableListService(null));
 		}else if("view".equals(cmd)){	
-			result.put("result", tableListService.tableViewService(tb_num, request.getSession()));
+			result.put("result", tableListService.tableViewService(tb_num));
 		}
 		PrintWriter pw = response.getWriter();
 		pw.println(gson.toJson(result));

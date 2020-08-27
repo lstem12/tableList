@@ -44,14 +44,8 @@ public class TableListServiceImpl implements TableListService {
 	}
 
 	@Override
-	public TableListVO tableViewService(String tb_num, HttpSession hs) {
-		tableListVO = tableListDAO.tableViewDAO(tb_num);
-		if (tableListVO != null) {
-			SessionListener.tableModify(tb_num);
-			hs.setAttribute("table", tableListVO);
-			return tableListVO;
-		}
-		return tableListVO;
+	public List<TableListVO> tableViewService(String tb_num) {
+		return tableListDAO.tableViewDAO(tb_num);
 	}
 
 	@Override

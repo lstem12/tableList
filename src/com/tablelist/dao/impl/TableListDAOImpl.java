@@ -137,10 +137,11 @@ public class TableListDAOImpl implements TableListDAO {
 	}
 
 	@Override
-	public TableListVO tableViewDAO(String tb_num) {
+	public List<TableListVO> tableViewDAO(String tb_num) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		List<TableListVO> tableList = new ArrayList<TableListVO>();
 		String sql = "select tb_num, tb_title, tb_name, tb_nickName, tb_credat, tb_views, "
 				+ "tb_field, tb_password, tb_content, tb_grd from table_list where tb_num=?";
 		try {
@@ -160,7 +161,8 @@ public class TableListDAOImpl implements TableListDAO {
 				voList.setTb_password(rs.getString("tb_password"));
 				voList.setTb_content(rs.getString("tb_content"));
 				voList.setTb_grd(rs.getString("tb_grd"));
-				return voList;
+				tableList.add(voList);
+				return tableList;
 			}
 			
 		}catch(SQLException e) {

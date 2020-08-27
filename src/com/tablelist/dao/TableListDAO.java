@@ -10,6 +10,6 @@ public interface TableListDAO {
 	int inserTableDAO(TableListVO tableListVO);
 	int tableDeleteDAO(TableListVO tableListVO);
 	int tableModifyDAO(TableListVO tableListVO);
-	TableListVO tableViewDAO(String tb_num);
+	List<TableListVO> tableViewDAO(String tb_num);
 	UserInfoVO selectUserForLogin(UserInfoVO user);
 }
