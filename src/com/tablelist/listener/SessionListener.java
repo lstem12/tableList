@@ -31,21 +31,6 @@ public class SessionListener implements HttpSessionListener {
 			}
 		}
 	}
-	public static synchronized void tableModify(String tb_num) {
-		Iterator<String> it = sessionMap.keySet().iterator();
-		while (it.hasNext()) {
-			String key = it.next();
-			HttpSession hs = sessionMap.get(key);
-			if (hs.getAttribute("table") != null) {
-				TableListVO tableListVO = (TableListVO) hs.getAttribute("table");
-				if (tb_num.equals(tableListVO.getTb_num())) {
-					hs.invalidate();
-					sessionMap.remove(key);
-				}
-			}
-		}
-	}
-
 	public SessionListener() {
 
 	}
