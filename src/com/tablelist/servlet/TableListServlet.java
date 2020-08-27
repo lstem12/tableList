@@ -23,13 +23,14 @@ public class TableListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
 	private TableListService tableListService = new TableListServiceImpl();
-	private TableListVO tableListVO = new TableListVO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getParameter("cmd");
-		String tb_num = request.getParameter("td_num");
+		String tb_num = request.getParameter("tb_num");
 		Map<String,Object> result = new HashMap<>();
 		if("list".equals(cmd)) {
 			result.put("list", tableListService.tableListService(null));
+		}else if("view".equals(cmd)){	
+			result.put("result", tableListService.tableViewService(tb_num, request.getSession()));
 		}
 		PrintWriter pw = response.getWriter();
 		pw.println(gson.toJson(result));
@@ -55,9 +56,12 @@ public class TableListServlet extends HttpServlet {
 			result.put("result", true);
 		}else if("insert".equals(tableListVO.getCmd())) {
 			result.put("result", tableListService.insertTableService(tableListVO));
-		}else if("view".equals(tableListVO.getCmd())){
-			result.put("result", tableListService.tableViewService(tableListVO));
+		}else if("delete".equals(tableListVO.getCmd())){
+			result.put("result", tableListService.tableDeleteService(tableListVO));
+		}else if("modify".equals(tableListVO.getCmd())){
+			result.put("result", tableListService.tableModifyService(tableListVO));
 		}
+		
 		String json = gson.toJson(result);
 		PrintWriter pw = response.getWriter();
 		pw.println(json);	

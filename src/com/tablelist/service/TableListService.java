@@ -11,6 +11,7 @@ public interface TableListService {
 	List<TableListVO> tableListService(TableListVO tableListVO);
 	int insertTableService(TableListVO tableListVO);
 	int tableDeleteService(TableListVO tableListVO);
-	boolean tableViewService(TableListVO tableListVO);
+	int tableModifyService(TableListVO tableListVO);
+	TableListVO tableViewService(String tb_num, HttpSession hs);
 	boolean doLogin(UserInfoVO user, HttpSession hs);
 }

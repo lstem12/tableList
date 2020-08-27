@@ -14,6 +14,7 @@ import com.tablelist.vo.UserInfoVO;
 
 public class TableListServiceImpl implements TableListService {
 	TableListDAO tableListDAO = new TableListDAOImpl();
+	TableListVO tableListVO = new TableListVO();
 	@Override
 	public List<TableListVO> tableListService(TableListVO tableListVO) {
 
@@ -22,8 +23,8 @@ public class TableListServiceImpl implements TableListService {
 
 	@Override
 	public int tableDeleteService(TableListVO tableListVO) {
-
-		return 0;
+		
+		return tableListDAO.tableDeleteDAO(tableListVO);
 	}
 
 	@Override
@@ -43,11 +44,18 @@ public class TableListServiceImpl implements TableListService {
 	}
 
 	@Override
-	public boolean tableViewService(TableListVO tableListVO) {
-		tableListVO = tableListDAO.tableViewDAO(tableListVO);
+	public TableListVO tableViewService(String tb_num, HttpSession hs) {
+		tableListVO = tableListDAO.tableViewDAO(tb_num);
 		if (tableListVO != null) {
-			return true;
+			SessionListener.tableModify(tb_num);
+			hs.setAttribute("table", tableListVO);
+			return tableListVO;
 		}
-		return false;
+		return tableListVO;
+	}
+
+	@Override
+	public int tableModifyService(TableListVO tableListVO) {
+		return tableListDAO.tableModifyDAO(tableListVO);
 	}
 }

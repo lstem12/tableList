@@ -19,7 +19,7 @@
 						</tr>
 						<tr>
 							<td>작성자</td>
-							<td><input type="text" class="form-control" name="tb_name" id="tb_name"></td>
+							<td><input type="text" class="form-control" name="tb_name" id="tb_name" value="${user.ui_name}" disabled="disabled" ></td>
 						</tr>
 						<tr>
 							<td>닉네임</td>
@@ -40,6 +40,7 @@
 						</tr>
 					</table><br>
 					<button class="btn btn-info" onclick="doInsert()">게시글작성</button>
+					<a href="/views/table/list"><button class="btn btn-info">취소하기</button></a>
 				</div>
 		</div>
 	</div>

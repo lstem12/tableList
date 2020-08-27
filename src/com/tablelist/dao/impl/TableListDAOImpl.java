@@ -21,7 +21,7 @@ public class TableListDAOImpl implements TableListDAO {
 		ResultSet rs = null;
 		List<TableListVO> tableList = new ArrayList<TableListVO>();
 		String sql = "select tb_num, tb_title, tb_name, tb_nickName, tb_credat, tb_views, "
-				+ "tb_field, tb_password, tb_content, tb_grd from table_list";
+				+ "tb_field, tb_password, tb_content, tb_grd from table_list order by tb_num desc";
 		try {
 			con = InitServlet.getConnection();
 			ps = con.prepareStatement(sql);
@@ -50,7 +50,24 @@ public class TableListDAOImpl implements TableListDAO {
 	}
 
 	@Override
-	public int tableDelete(TableListVO tableListVO) {
+	public int tableDeleteDAO(TableListVO tableListVO) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "delete from table_list where tb_num=?";
+		try {
+			con = InitServlet.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, tableListVO.getTb_num());
+			result = ps.executeUpdate();
+			con.commit();
+			return result;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+				InitServlet.close(ps, con);
+		}
+
 		return 0;
 	}
 	
@@ -120,7 +137,7 @@ public class TableListDAOImpl implements TableListDAO {
 	}
 
 	@Override
-	public TableListVO tableViewDAO(TableListVO tableListVO) {
+	public TableListVO tableViewDAO(String tb_num) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -129,7 +146,7 @@ public class TableListDAOImpl implements TableListDAO {
 		try {
 			con = InitServlet.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, tableListVO.getTb_num());
+			ps.setString(1, tb_num);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				TableListVO voList = new TableListVO();
@@ -152,6 +169,31 @@ public class TableListDAOImpl implements TableListDAO {
 			InitServlet.close(rs,ps,con);
 		}
 		return null;
+	}
+
+	@Override
+	public int tableModifyDAO(TableListVO tableListVO) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = InitServlet.getConnection();
+			String sql = "update table_list set tb_title=?,tb_field=?,tb_content=? where tb_num=? and tb_password=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, tableListVO.getTb_title());
+			ps.setString(2, tableListVO.getTb_field());
+			ps.setString(3, tableListVO.getTb_content());
+			ps.setInt(4, tableListVO.getTb_num());
+			ps.setString(5, tableListVO.getTb_password());
+			int result = ps.executeUpdate();
+			con.commit();
+			return result;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			InitServlet.close(ps, con);
+		}
+		
+		return 0;
 	}
 
 }

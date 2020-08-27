@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import com.tablelist.vo.TableListVO;
 import com.tablelist.vo.UserInfoVO;
 
 @WebListener
@@ -24,6 +25,20 @@ public class SessionListener implements HttpSessionListener {
 			if (hs.getAttribute("user") != null) {
 				UserInfoVO user = (UserInfoVO) hs.getAttribute("user");
 				if (ui_id.equals(user.getUi_id())) {
+					hs.invalidate();
+					sessionMap.remove(key);
+				}
+			}
+		}
+	}
+	public static synchronized void tableModify(String tb_num) {
+		Iterator<String> it = sessionMap.keySet().iterator();
+		while (it.hasNext()) {
+			String key = it.next();
+			HttpSession hs = sessionMap.get(key);
+			if (hs.getAttribute("table") != null) {
+				TableListVO tableListVO = (TableListVO) hs.getAttribute("table");
+				if (tb_num.equals(tableListVO.getTb_num())) {
 					hs.invalidate();
 					sessionMap.remove(key);
 				}
