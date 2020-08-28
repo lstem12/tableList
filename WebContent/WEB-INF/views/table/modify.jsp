@@ -71,9 +71,9 @@ var tb_num = ${param.tb_num};
 					var col = td.getAttribute('data-col');
 					if('tb_title'===col){
 						html_title +='<input type="text" class="form-control" name="'+col+'" id="'+col+'" value="'+ result[col] +'">';
-					}if('tb_field'===col){
+					}else if('tb_field'===col){
 						html_field +='<input type="text" class="form-control" name="'+col+'" id="'+col+'" value="'+ result[col] +'">';
-					}if('tb_content'===col){
+					}else if('tb_content'===col){
 						html_content +='<input type="text" class="form-control" name="'+col+'" id="'+col+'" value="'+ result[col] +'">';
 					}
 				})

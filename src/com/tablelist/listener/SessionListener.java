@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import com.tablelist.vo.TableListVO;
 import com.tablelist.vo.UserInfoVO;
 
 @WebListener
