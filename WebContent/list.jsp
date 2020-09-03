@@ -9,7 +9,7 @@
 </head>
 <body>
 <script>
-var pageSize =10;
+var pageSize = 10;
 var totalCnt = 0;
 var totalPage = 0;
 $(document).ready(getList);
@@ -39,21 +39,17 @@ function getList(page){
 				html+= '</tr>';
 			}
 			$('#tbody').html(html);			
-					var pageHtml ='<a href="#" onclick="getList('+ (page-1) +')">◀</a>';
+				var pageHtml ='<a href="#" onclick="getList('+ (page-1) +')">◀</a>';
 				if(page<=1){
 					pageHtml ='<a href="#" onclick="getList('+ 1 +')">◀</a>';
 				}
 			
-			for(var i=1;i<=pageSize;i++){
+			for(var i=1;i<=totalPage;i++){
 				if(page==i){
 					pageHtml += '[<b>' + i + '</b>]';
-				}else{
+				}else if(i<=10){
 					pageHtml += '[<a href="#" onclick="getList('+ i +')">' + i + '</a>] ';
 				}
-			}
-			if(totalPage%pageSize == 0){
-				pageSize = pageSize + 10;
-				pageHtml += '<a href="#" onclick="getList('+ (pageSize) +')"></a>';
 			}
 			pageHtml += '<a href="#" onclick="getList('+ (page+1) +')">▶</a>';
 			$('#pageDiv').html(pageHtml);
