@@ -39,19 +39,24 @@ function getList(page){
 				html+= '</tr>';
 			}
 			$('#tbody').html(html);			
-				var pageHtml ='<a href="#" onclick="getList('+ (page-1) +')">◀</a>';
-				if(page<=1){
-					pageHtml ='<a href="#" onclick="getList('+ 1 +')">◀</a>';
-				}
+			var pageHtml ='<a href="#" onclick="getList('+ (page-1) +')">◀</a>';
+			if(page<=1){
+				pageHtml ='<a href="#" onclick="getList('+ 1 +')">◀</a>';
+			}
 			
 			for(var i=1;i<=totalPage;i++){
 				if(page==i){
 					pageHtml += '[<b>' + i + '</b>]';
-				}else if(i<=10){
+				}else{
 					pageHtml += '[<a href="#" onclick="getList('+ i +')">' + i + '</a>] ';
 				}
 			}
+			
 			pageHtml += '<a href="#" onclick="getList('+ (page+1) +')">▶</a>';
+			if(page>totalPage){
+				pageHtml ='<a href="#" onclick="getList('+ totalPage +')">▶</a>';
+			}
+			
 			$('#pageDiv').html(pageHtml);
 		}
 	})

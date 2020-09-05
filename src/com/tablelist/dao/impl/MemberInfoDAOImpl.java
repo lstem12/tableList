@@ -16,14 +16,14 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			return ss.selectList("Member.selectMemberList",mi);
 		}
 	}
-	public static void main(String[] args) {
-		MemberInfoDAO memberInfoDAO = new MemberInfoDAOImpl();
-		Map<String,Object> param = new HashMap<>();
-		param.put("startNum", 51);
-		param.put("endNum", 60);
-		List<Map<String,Object>>mList = memberInfoDAO.selectMemberInfoList(param);
-		for(Map<String,Object>m : mList) {
-			System.out.println(m);
-		}
-	}
+//	public static void main(String[] args) {
+//		MemberInfoDAO memberInfoDAO = new MemberInfoDAOImpl();
+//		Map<String,Object> param = new HashMap<>();
+//		param.put("startNum", 51);
+//		param.put("endNum", 60);
+//		List<Map<String,Object>>mList = memberInfoDAO.selectMemberInfoList(param);
+//		for(Map<String,Object>m : mList) {
+//			System.out.println(m);
+//		}
+//	} 
 }
