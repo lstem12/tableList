@@ -24,12 +24,15 @@ public class MemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String,Object> param = new HashMap<>();
 		param.put("page",request.getParameter("page"));
-		param.put("pageSize",request.getParameter("pageSize"));
+		param.put("pageSize", request.getParameter("pageSize"));
+		param.put("MI_NUM",request.getParameter("MI_NUM"));
+		param.put("MI_ID",request.getParameter("MI_ID"));
+		param.put("MI_NAME",request.getParameter("MI_NAME"));
 		List<Map<String,Object>> mList = memberService.selectMemberInfoList(param);
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw = response.getWriter(); 
 		Map<String,Object> rMap = new HashMap<>();
 		rMap.put("list", mList);
-		rMap.put("totalCnt", 10000);
+		rMap.put("totalCnt", memberService.selectCountMember(param));
 		pw.println(gson.toJson(rMap));
 	}
 

@@ -26,4 +26,11 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 //			System.out.println(m);
 //		}
 //	} 
+
+	@Override
+	public int selectCountMember(Map<String, Object> mi) {
+		try(SqlSession ss = MybatisServlet.getSession()){
+			return ss.selectOne("Member.selectCountMember",mi);
+		}
+	}
 }

@@ -5,4 +5,5 @@ import java.util.Map;
 
 public interface MemberInfoDAO {
 	List<Map<String, Object>> selectMemberInfoList(Map<String, Object> mi);
+	int selectCountMember(Map<String,Object> mi);
 }

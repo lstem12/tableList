@@ -30,4 +30,8 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println(m);
 		}
 	}
+	@Override
+	public int selectCountMember(Map<String, Object> mi) {
+		return memberInfoDAO.selectCountMember(mi);
+	}
 }
